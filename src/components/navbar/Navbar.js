@@ -1,19 +1,19 @@
-import { Fragment } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
+import { Fragment } from 'react';
+import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { useNavigate } from 'react-router-dom';
 
 
 const navigation = [
   { name: 'Dashboard', href: '#', current: true },
 
-]
+];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(' ');
 }
 
 export default function Navbar() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -64,7 +64,7 @@ export default function Navbar() {
                 
                 </button>
                 <div className='text-white'> <span>Edit and delete Profile
-                    </span></div>
+                </span></div>
 
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
@@ -92,7 +92,7 @@ export default function Navbar() {
                       <Menu.Item>
                         {({ active }) => (
                           <div
-                           onClick={()=>navigate("/updateuser")}
+                            onClick={()=>navigate("/updateuser")}
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
                             Your Profile
@@ -129,5 +129,5 @@ export default function Navbar() {
         </>
       )}
     </Disclosure>
-  )
+  );
 }

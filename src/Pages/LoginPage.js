@@ -50,7 +50,7 @@ export default function LoginPage() {
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
-            <Input
+              <Input
                 id="email"
                 name="email"
                 type="email"
@@ -58,7 +58,7 @@ export default function LoginPage() {
               />
             </div>
             <div>
-            <Input
+              <Input
                 id="password"
                 name="password"
                 type="password"

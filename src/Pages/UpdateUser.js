@@ -9,7 +9,7 @@ export default function UpdateUser() {
   const userRef = useRef();
   const [error, setError] = useState("");
 
-    //------------- updating user details like name and password---------------
+  //------------- updating user details like name and password---------------
 
   const updateSubmit = async (e) => {
     e.preventDefault();
@@ -26,7 +26,7 @@ export default function UpdateUser() {
     }
   };
 
-    //------------- delect user account ---------------
+  //------------- delect user account ---------------
 
   const delectUser = async () => {
     try {
@@ -53,7 +53,7 @@ export default function UpdateUser() {
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
-            <Input
+              <Input
                 id="name"
                 name="name"
                 type="text"
@@ -61,7 +61,7 @@ export default function UpdateUser() {
               />
             </div>
             <div>
-            <Input
+              <Input
                 id="password"
                 name="password"
                 type="password"
