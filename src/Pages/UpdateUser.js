@@ -43,7 +43,7 @@ export default function UpdateUser() {
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-8">
         <h2 className="text-center text-3xl font-extrabold text-gray-900">
-          Update user delection
+          Update and delection
         </h2>
         <form
           ref={userRef}
