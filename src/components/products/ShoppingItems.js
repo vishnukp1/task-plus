@@ -1,4 +1,5 @@
 import { Button } from "@material-tailwind/react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const ShoppingItems = ({ item }) => {
   return (
@@ -7,10 +8,11 @@ const ShoppingItems = ({ item }) => {
         {item?.map((data) => (
           <div key={data.id} className="mx-5">
             <div className="relative  bg-grey rounded-md p-1">
-              <img
-                data-aos="zoom-in"
+              <LazyLoadImage
                 src={data.image}
-                alt=""
+                alt={`Product ${data.id}`}
+                effect="hide" 
+                width="100%" 
                 className="h-[180px] w-[350px] object-fill rounded-md"
               />
 

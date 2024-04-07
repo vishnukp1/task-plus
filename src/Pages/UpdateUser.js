@@ -11,7 +11,7 @@ export default function UpdateUser() {
 
   //------------- updating user details like name and password---------------
 
-  const updateSubmit = async (e) => {
+  const updateUser = async (e) => {
     e.preventDefault();
 
     const userData = {
@@ -28,7 +28,7 @@ export default function UpdateUser() {
 
   //------------- delect user account ---------------
 
-  const delectUser = async () => {
+  const deleteUser = async () => {
     try {
       const response = await Axios.delete(
         "api/delete-user"
@@ -48,7 +48,7 @@ export default function UpdateUser() {
         <form
           ref={userRef}
           className="mt-8 space-y-6"
-          onSubmit={(e) => updateSubmit(e)}
+          onSubmit={(e) => updateUser(e)}
         >
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="rounded-md shadow-sm -space-y-px">
@@ -84,7 +84,7 @@ export default function UpdateUser() {
             Update name and password
             </button>
             <button
-              onClick={delectUser}
+              onClick={deleteUser}
               className="group relative w-full flex justify-center
               py-2 px-4 border border-transparent text-sm font-medium
               rounded-md text-white bg-indigo-600 hover:bg-indigo-700
