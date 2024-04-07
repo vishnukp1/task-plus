@@ -9,12 +9,14 @@ export default function UpdateUser() {
   const userRef = useRef();
   const [error, setError] = useState("");
 
+    //------------- updating user details like name and password---------------
+
   const updateSubmit = async (e) => {
     e.preventDefault();
 
     const userData = {
       name: userRef.current.name.value,
-      password: userRef.current.name.value,
+      password: userRef.current.password.value,
     };
     try {
       const response = await Axios.put("/api/update-user", userData);
@@ -23,6 +25,8 @@ export default function UpdateUser() {
       setError("error ocurred:",error);
     }
   };
+
+    //------------- delect user account ---------------
 
   const delectUser = async () => {
     try {
