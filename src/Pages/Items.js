@@ -5,16 +5,18 @@ import Navbar from "../components/navbar/Navbar";
 
 const Items = () => {
   const [item, setItem] = useState([]);
+
+
   const getShoopingItems = async () => {
     try {
       const response = await Axios.get("/api/items");
-      
-      setItem(response.data);
 
+      setItem(response.data);
     } catch (error) {
-    console.error("error occured:", error);
+      console.error("error occured:", error);
     }
   };
+  
   useEffect(() => {
     getShoopingItems();
   }, []);

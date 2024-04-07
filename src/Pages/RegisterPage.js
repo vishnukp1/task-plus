@@ -33,6 +33,7 @@ export default function RegisterPage() {
       setError("Enter valid email and details");
     }
   };
+  
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-8">
