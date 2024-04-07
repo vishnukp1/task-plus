@@ -1,43 +1,49 @@
 import { LockClosedIcon } from "@heroicons/react/solid";
 import axios from "axios";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function RegisterPage() {
+  const navigate = useNavigate();
   const userRef = useRef();
-  const handleRegister = async (e) => {
+  const [error, setError] = useState("");
+
+  const regsisterSubmit = async (e) => {
     e.preventDefault();
     const userData = {
       name: userRef.current.name.value,
       email: userRef.current.email.value,
       password: userRef.current.name.value,
     };
-    
+
     try {
-      const response = await axios.post(
-        "/api/register",
-        userData
-      );
-      localStorage.setItem("token", response.data.token);
-      console.log(response.data.token);
-    } catch (error) {}
+      const response = await axios.post("https://interview-plus.onrender.com/api/register", userData);
+      const token = response.data.token
+      localStorage.setItem("token", token);
+     console.log(token);
+    if(token){
+      navigate("/items")
+    }
+    } catch (error) {
+      setError("Enter valid email and details");
+    }
   };
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-8">
         <h2 className="text-center text-3xl font-extrabold text-gray-900">
-          Sign in to your account
+          Create your account
         </h2>
         <form
           ref={userRef}
           className="mt-8 space-y-6"
-          onSubmit={(e) => handleRegister(e)}
+          onSubmit={(e) => regsisterSubmit(e)}
         >
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
-              <label className="sr-only">Email address</label>
               <input
-                id="email-address"
+                id="name-address"
                 name="name"
                 type="text"
                 autoComplete="name"
@@ -47,11 +53,10 @@ export default function RegisterPage() {
                 placeholder-gray-500 text-gray-900 rounded-t-md
                 focus:outline-none focus:ring-indigo-500
                 focus:border-indigo-500 focus:z-10 sm:text-sm mb-3"
-                placeholder="Email address"
+                placeholder="Email name"
               />
             </div>
             <div>
-              <label className="sr-only">Email address</label>
               <input
                 id="email-address"
                 name="email"
@@ -67,9 +72,6 @@ export default function RegisterPage() {
               />
             </div>
             <div>
-              <label htmlFor="password" className="sr-only">
-                Password
-              </label>
               <input
                 id="password"
                 name="password"
@@ -102,18 +104,10 @@ export default function RegisterPage() {
                 Remember me
               </label>
             </div>
-
-            <div className="text-sm">
-              <a
-                href="#"
-                className="font-medium text-indigo-600 hover:text-indigo-500"
-              >
-                Forgot your password?
-              </a>
-            </div>
           </div>
 
           <div>
+            {error && <p className="text-center mb-4">{error}</p>}
             <button
               type="submit"
               className="group relative w-full flex justify-center
@@ -128,10 +122,19 @@ export default function RegisterPage() {
                   aria-hidden="true"
                 />
               </span>
-              Sign in
+              Register
             </button>
           </div>
         </form>
+        <div className="mt-4 font-semibold  text-sm text-slate-500 text-center md:text-left">
+          Already registered?{" "}
+          <div
+            className="text-red-600 hover:underline hover:underline-offset-4"
+            onClick={() => navigate("/login")}
+          >
+            Login
+          </div>
+        </div>
       </div>
     </div>
   );

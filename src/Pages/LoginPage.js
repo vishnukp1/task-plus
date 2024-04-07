@@ -1,25 +1,27 @@
 import { LockClosedIcon } from "@heroicons/react/solid";
-import axios from "axios";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import Axios from "../utils/axois";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
+  const navigate = useNavigate();
   const userRef = useRef();
-  const handleRegister = async (e) => {
+  const [error, setError] = useState("");
+
+  const loginSubmit = async (e) => {
     e.preventDefault();
     const userData = {
       email: userRef.current.email.value,
       password: userRef.current.name.value,
     };
     try {
-      const response = await axios.post(
-        "https://interview-plus.onrender.com/api/login",
-        userData
-      );
+      const response = await Axios.post("/api/login", userData);
       console.log(response);
     } catch (error) {
-      console.log()
+      setError("Email or password are invalid");
     }
   };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-8">
@@ -29,13 +31,11 @@ export default function LoginPage() {
         <form
           ref={userRef}
           className="mt-8 space-y-6"
-          onSubmit={(e) => handleRegister(e)}
+          onSubmit={(e) => loginSubmit(e)}
         >
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="rounded-md shadow-sm -space-y-px">
-           
             <div>
-              <label className="sr-only">Email address</label>
               <input
                 id="email-address"
                 name="email"
@@ -51,9 +51,6 @@ export default function LoginPage() {
               />
             </div>
             <div>
-              <label htmlFor="password" className="sr-only">
-                Password
-              </label>
               <input
                 id="password"
                 name="password"
@@ -86,17 +83,8 @@ export default function LoginPage() {
                 Remember me
               </label>
             </div>
-
-            <div className="text-sm">
-              <a
-                href="#"
-                className="font-medium text-indigo-600 hover:text-indigo-500"
-              >
-                Forgot your password?
-              </a>
-            </div>
           </div>
-
+          {error && <p className="text-center mb-4">{error}</p>}
           <div>
             <button
               type="submit"
@@ -116,6 +104,15 @@ export default function LoginPage() {
             </button>
           </div>
         </form>
+        <div className="mt-4 font-semibold text-sm text-slate-500 text-center md:text-left">
+          Don&apos;t have an account?{" "}
+          <div
+            className="text-red-600 hover:underline hover:underline-offset-4"
+            onClick={() => navigate("/")}
+          >
+            Register
+          </div>
+        </div>
       </div>
     </div>
   );
